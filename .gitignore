@@ -1,0 +1,5 @@
+
+*.sublime-project
+*.sublime-workspace
+/src/app/img/Thumbs.db
+/tools/testrunner

@@ -1,0 +1,8 @@
+-- SIMPLE ECHO TEST
+-- GO TO WEBSITE & TAKE SCREENSHOT
+
+GO TO "http://desalasworks.com"
+
+TAKE SCREENSHOT
+
+

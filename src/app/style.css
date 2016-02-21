@@ -1,0 +1,97 @@
+* { -webkit-user-select: none; }
+
+html { overflow: scroll; height: 100%; min-width: 780px;}
+
+input {height: 30px !important; line-height: 30px;}
+
+body { height: 100%;}
+
+section {display: none; padding-top: 105px;}
+
+section nav {width:260px; float:left; margin-left: 15px; padding-right: 10px; }
+section nav.fullheight {overflow-y: scroll;}
+section nav.fixed {position: fixed !important;}
+section nav.well {padding: 4px 0; overflow: inherit;}
+section .main {display: block; padding-left: 300px; margin-right: 15px;}
+section .main .alert {margin-bottom: 10px;}
+
+/*#header { padding: 5px 10px; background: #444; color: #fff; }
+#header h1 { font-size: 16px; }
+*/
+
+section .main ul.thumbnails .thumbnail .background {background-color: #eee; text-align: center;}
+
+section .hero-unit.go-pro {color: #c8c0db; background: linear-gradient(135deg, rgba(1,8,41,1) 0%, rgba(75,52,125,1) 100%); text-shadow: 0px 1px 2px rgba(0, 0, 0, 1);}
+section .hero-unit.go-pro h2 {color: #fff; }
+section .hero-unit.go-pro div.browsers {padding: 10px 20px; border-radius: 5px; text-align:center; background: linear-gradient(135deg, rgba(75,52,125,1) 0%, rgba(255,255,255,1) 100%);}
+
+/* BOOTSTRAP OVERRIDES */
+.popover .popover-title {font-weight: bold; }
+.modal h3 {font-size: 18px; font-weight: 500; }
+
+#top-nav { background: #efedf5; height: 70px; padding: 10px 15px; border-bottom: 1px solid #ccc; overflow: hidden;}
+#top-nav ul li div.thumbnail {cursor: pointer; background-color: #fff; border: 1px solid #ccc; text-shadow: 0px 1px 1px rgba(255, 255, 255, 1);}
+#top-nav ul li div.thumbnail.active,
+#top-nav ul li div.thumbnail:hover { border: 1px solid #bbb; background-color: #e1dfeb;}
+#top-nav ul li div.thumbnail img {width: 32px; height: 32px; margin-bottom: 5px;}
+#top-nav ul li div.thumbnail p { margin: 5px 0 0 0; text-align: center;}
+
+#splash {position: absolute; z-index: 10000; padding: 30px; background: linear-gradient(135deg, rgba(254,254,254,1) 0%, rgba(221,221,221,1) 77%, rgba(221,221,221,1) 100%); width: 400px; height: 200px; top: 0; bottom: 0; left: 0; right: 0; margin: auto; border: 1px solid #777;box-shadow: 5px 5px 20px 0px rgba(50, 50, 50, 0.69);}
+#splash h1, #splash p, #splash small {text-shadow: 0px 1px 1px rgba(255, 255, 255, 1);}
+#splash img {float: left; margin:0 20px 10px 0;}
+#splash h1 {font-size: 300%; font-family: Impact, Charcoal, sans-serif; font-weight: normal; padding-top: 15px; }
+#splash small {display: block; margin-top: 90px;}
+
+#browse {  }
+
+#browse ul#file-browser {}
+#browse ul#file-browser > li > a { padding-left: 40px; background-repeat: no-repeat; background-position: 10px center; }
+#browse ul#file-browser > li > a.up {background-image: url('img/icon-returnarrow.16x16.gif'); }
+#browse ul#file-browser > li > a.folder {background-image: url('img/icon-folder.16x16.gif'); }
+#browse ul#file-browser > li > a.file {background-image: url('img/icon-file.16x16.gif'); }
+#browse ul#file-browser > li > a.newfile {background-image: url('img/icon-add.16x16.gif'); }
+#browse ul#file-browser > li > a.newfolder {background-image: url('img/icon-newfolder.16x16.gif'); }
+#browse ul#file-browser > li > a.active {color: #fff; background-color: #3268d6}
+
+#browse ul#file-browser ul.crumb {margin: 0;}
+#browse ul#file-browser ul.crumb > li {display: inline; } 
+#browse ul#file-browser ul.crumb > li:first-child:before{ content: ""; margin: 0px; }
+#browse ul#file-browser ul.crumb > li:before{ content: "\00BB"; margin-right: 5px; }
+#browse ul#file-browser ul.crumb > li > a {display: inline;} 
+
+#browse ul#file-tabs {margin-bottom: 10px;}
+#browse ul#file-tabs li {position: relative;}
+#browse ul#file-tabs li a {padding-right:25px;}
+#browse ul#file-tabs li sup {position: absolute; display: block; color: #ccc; line-height: 6px; right: 8px; top: 5px; padding: 3px; cursor: pointer; font-weight: bold;}
+#browse ul#file-tabs li sup:hover {color: #444;};
+
+#browse #console { line-height: 15px; }
+
+#results-browser > li > a.active {color: #fff; background-color: #3268d6}
+#results-browser > li > a.active div.muted {color: #ccc;}
+
+#results-viewer div.alert.alert-info p {margin: 0; padding: 0;}
+#results-viewer div.alert.alert-info { padding-right: 10px;}
+#results-viewer div.alert.alert-info a.btn {margin-top: 5px;}
+#results-viewer table tbody tr td {padding: 10px 14px; font: bold 12px Monaco, Menlo, Consolas, 'Courier New', monospace; }
+#results-viewer ul.nav.nav-tabs li:first-child {padding-left: 10px;}
+#results-viewer ul.nav.nav-tabs li a {font-size: 12px; padding: 4px 10px; color: #999; background: linear-gradient(to bottom, rgba(250,250,250,1) 0%, rgba(230,230,230,1) 100%); border: 1px solid #ddd;}
+#results-viewer ul.nav.nav-tabs li.active a {color: #333; background: #fff !important; border-bottom: 1px solid white !important;}
+#results-viewer ul.nav.nav-tabs li a:hover {color: #333; background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(240,240,240,1) 100%); border: 1px solid #ddd; }
+
+#results-viewer #results-original .alert.grey-box { border: 1px solid #ccc; border-bottom: 0; background: #ddd; padding-bottom: 1px; margin-bottom: 0; border-bottom-left-radius: 0px; border-bottom-right-radius: 0px;}
+#results-viewer #results-original .alert.grey-box h4 { color: #666; }
+#results-viewer #results-original .alert.grey-box p { color: #666; padding-bottom: 0;}
+#results-viewer #results-original pre.prettyprint { border: 1px solid #ccc; background: #eee; padding: 0; line-height: 0; border-top-left-radius: 0px; border-top-right-radius: 0px; }
+#results-viewer #results-original pre.prettyprint ol { padding-left: 20px; margin-bottom: 0;}
+#results-viewer #results-original pre.prettyprint ol li {list-style-type: decimal; color: #888; line-height: 15px; background: #f9f9f9; border-left: 1px solid #aaa; padding-left: 5px;}
+
+
+/*#results-viewer #results-original pre.prettyprint { border: 1px solid #ccc; background: #eee; padding: 0;}
+#results-viewer #results-original pre.prettyprint ol { padding-left: 20px; }
+#results-viewer #results-original pre.prettyprint ol li {color: #888; line-height: 15px; background: #fff; border-left: 1px solid #aaa; padding-left: 5px;}
+#results-viewer li.L0, #results-viewer li.L1, #results-viewer li.L2, #results-viewer li.L3,
+#results-viewer li.L5, #results-viewer li.L6, #results-viewer li.L7, #results-viewer li.L8 { list-style-type: decimal !important }
+#results-viewer #results-original pre.prettyprint .str {color: blue;}
+#results-viewer #results-original pre.prettyprint .com {color: rgb(113, 150, 130);}
+#results-viewer #results-original pre.prettyprint .pln {color: rgb(127, 0, 85);}*/

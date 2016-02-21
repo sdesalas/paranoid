@@ -1,0 +1,24 @@
+<html>
+<head>
+<title>Wiki Parser</title>
+<link href="lib/bootstrap/css/bootstrap.css" rel="stylesheet">
+<link href="style.css" rel="stylesheet">
+</head>
+<body>
+<script>
+	document.write(window.location.href + '<br/>');
+	var fs = require('fs');
+	var markdown = require('markdown').markdown;
+	var key, value, contents, search = window.location.search.substr(1).split('&');
+	for(var i = 0; i < search.length; i++) {
+		key = search[i].split('=')[0];
+		value = search[i].split('=')[1];
+		document.write(i + ' - ' + key +  '<br/>');
+		if (key === 'page') {
+			contents = fs.readFileSync('wiki/' + value, {encoding: 'utf8'});
+			document.write( markdown.toHTML(contents) );
+		} 
+	}
+</script>
+</body>
+</html>

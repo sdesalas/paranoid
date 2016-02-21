@@ -1,0 +1,27 @@
+
+-- SETUP 
+SET @url = "http://demoapp.testdirector.pro/"
+SET @username = "jsmith" -- TO BE OVERWRITTEN
+SET @password = "secret" -- TO BE OVERWRITTEN
+
+-- SUITE ARGUMENTS
+SET @login_box = "form.elgg-form-login input[name=username]"
+SET @pass_box = "form.elgg-form-login input[name=password]"
+SET @button = "form.elgg-form-login input[type=submit]"
+SET @activity_link = "ul.elgg-menu-site li.elgg-menu-item-activity a"
+
+GO TO @url
+
+TAKE SCREENSHOT
+
+CHECK @login_box EXISTS
+CLICK @login_box AND WRITE @username
+CLICK @pass_box AND WRITE @password
+
+TAKE SCREENSHOT
+
+CLICK @button
+CHECK @activity_link EXISTS
+
+TAKE SCREENSHOT
+

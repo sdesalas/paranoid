@@ -1,0 +1,20 @@
+
+-- SETUP 
+SET @url = "http://localhost:8081/"
+SET @username = "testing" -- TO BE OVERWRITTEN
+SET @password = "w3lcom3!" -- TO BE OVERWRITTEN
+
+-- SUITE ARGUMENTS
+SET @logout_link = "#HeadLoginView_HeadLoginStatus"
+SET @login_box = "#ADLogin_UserName"
+
+GO TO @url
+
+TAKE SCREENSHOT
+
+CHECK @logout_link EXISTS
+CLICK @logout_link 
+CHECK @login_box EXISTS
+
+TAKE SCREENSHOT
+

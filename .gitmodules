@@ -1,0 +1,3 @@
+[submodule "src/app/wiki"]
+	path = src/app/wiki
+	url = https://sdesalas@bitbucket.org/sdesalas/testdirector.git/wiki

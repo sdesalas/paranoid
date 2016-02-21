@@ -1,0 +1,10 @@
+[{
+	name: "Browse",
+	description: "Open Test Editor",
+	thumb: "icon-folder.32x32.png",
+	class: "active"
+},{
+	name: "History",
+	description: "",
+	thumb: "icon-clock.32x32.png"
+}]
