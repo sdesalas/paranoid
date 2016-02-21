@@ -1,2 +1,1 @@
-# phobia
-Webkit-based Test-Automation App for PhantomJS
+![PHOBIA](design/logo.256x256.png)
