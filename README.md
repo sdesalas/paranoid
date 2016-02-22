@@ -6,7 +6,7 @@ It is written using node-webkit, with PhantomJS as its core scripting engine.
 
 ### Simplified SQL-like Syntax
 
-The thing that sets Paranoid apart from other test frameworks is the simplicity of the syntax for writing tests. It is aimed at testers who are savvy enough to write their own code and want a great degree of precision, but struggle to use more complex frameworks like Selenium.
+The thing that sets Paranoid apart from other test frameworks is the simplicity of the syntax for writing tests. It is aimed at testers who want total control and are savvy enough to write their own code, but struggle to use more complex frameworks like Selenium.
 
 An example of a test is as follows:
 
