@@ -30,9 +30,9 @@ section .hero-unit.go-pro div.browsers {padding: 10px 20px; border-radius: 5px; 
 .modal h3 {font-size: 18px; font-weight: 500; }
 
 #top-nav { background: #303030 url(img/background.png); height: 70px; padding: 10px 15px; border-bottom: 1px solid #ccc; overflow: hidden;}
-#top-nav ul li div.thumbnail {cursor: pointer; background-color: #fff; border: 1px solid #ccc; text-shadow: 0px 1px 1px rgba(255, 255, 255, 1);}
+#top-nav ul li div.thumbnail {cursor: pointer; background-color: #ccc; color: #666; border: 1px solid #ccc; text-shadow: 0px 1px 1px rgba(255, 255, 255, 1);}
 #top-nav ul li div.thumbnail.active,
-#top-nav ul li div.thumbnail:hover { border: 1px solid #bbb; background-color: #e1dfeb;}
+#top-nav ul li div.thumbnail:hover { border: 1px solid #bbb; color: #000; background-color: #fff;}
 #top-nav ul li div.thumbnail img {width: 32px; height: 32px; margin-bottom: 5px;}
 #top-nav ul li div.thumbnail p { margin: 5px 0 0 0; text-align: center;}
 
