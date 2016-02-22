@@ -1,6 +1,6 @@
 ![PARANOID](https://raw.githubusercontent.com/sdesalas/paranoid/master/design/logo.512x256.png)
 
-Paranoid is a cross-platform app for running automated tests.
+Paranoid is a cross-platform desktop app for running automated tests.
 
 It is written using node-webkit, with PhantomJS as its core engine.
 
