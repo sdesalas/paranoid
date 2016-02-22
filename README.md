@@ -4,7 +4,11 @@ Paranoid is a cross-platform app for running automated tests.
 
 It is written using node-webkit, with PhantomJS as its core testing engine.
 
-The thing that sets Paranoid apart is the simplicity of the syntax for writing tests. An example of a test is as follows:
+### Simplified Syntax
+
+The thing that sets Paranoid apart from other test framewroks is the simplicity of the syntax for writing tests. 
+
+An example of a test is as follows:
 
 ```
  1. GO TO "http://www.valuetrader.net/"
