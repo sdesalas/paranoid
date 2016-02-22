@@ -1,1 +1,1 @@
-![PARANOID](design/logo.512x512.png)
+![PARANOID](design/logo.512x256.png)
