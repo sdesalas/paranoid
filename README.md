@@ -2,7 +2,7 @@
 
 Paranoid is a cross-platform app for running automated tests.
 
-It is written using node-webkit, with PhantomJS as its core scripting engine.
+It is written using node-webkit, with PhantomJS as its core engine.
 
 ### Simplified SQL-like Syntax
 
