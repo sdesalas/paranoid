@@ -6,23 +6,24 @@ It is written using node-webkit, with PhantomJS as its core engine.
 
 ### Simplified SQL-like Syntax
 
-The thing that sets Paranoid apart from other test frameworks is the simplicity of the syntax for writing tests. It is aimed at testers who want total control and are savvy enough to write their own code, but struggle to use more complex frameworks like Selenium.
+The thing that sets Paranoid apart from other test frameworks is the simplicity of the syntax for writing tests. 
+
+It is aimed at testers who want total control and are savvy enough to write their own code, but struggle to use more complex frameworks like Selenium.
 
 An example of a test is as follows:
 
 ```
  1. GO TO "http://www.valuetrader.net/"
- 2. CLICK ON "a.login"
- 3. WAIT FOR RESPONSE
- 4. CLICK ON "input[name=User.Email]" AND WRITE "joe.smith@gmail.com"
- 5. CLICK ON "input[name=User.Password]" AND WRITE "mysecret"
- 6. WAIT FOR RESPONSE
+ 2. TAKE SCREENSHOT
+ 3. CLICK ON "a.login"
+ 4. WAIT FOR RESPONSE
+ 5. CLICK ON "input[name=User.Email]" AND WRITE "joe.smith@gmail.com"
+ 6. CLICK ON "input[name=User.Password]" AND WRITE "mysecret"
  7. CLICK ON "input[name=User.Terms]"
  8. CLICK ON "input[value=Login]"
  9. TAKE SCREENSHOT
 10. WAIT FOR RESPONSE
 11. CHECK "a#user-nav-link" EXISTS
-12. TAKE SCREENSHOT
 ```
 
 ### User Interface
