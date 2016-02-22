@@ -24,3 +24,9 @@ An example of a test is as follows:
 11. CHECK "a#user-nav-link" EXISTS
 12. TAKE SCREENSHOT
 ```
+
+### User Interface
+
+The user interface simplifies a lot of the workflows around creating and running various suites of tests.
+
+![PARANOID](https://raw.githubusercontent.com/sdesalas/paranoid/master/design/screenshots/2016-02-22.History.png)
