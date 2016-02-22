@@ -1,1 +1,1 @@
-![PHOBIA](design/logo.256x256.png)
+![PARANOID](design/logo.512x512.png)
