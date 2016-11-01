@@ -4,7 +4,7 @@ Paranoid is a cross-platform desktop app for running automated tests.
 
 It is written using node-webkit, with PhantomJS as its core engine.
 
-### Simplified SQL-like Syntax
+## Simplified SQL-like Syntax
 
 The thing that sets Paranoid apart from other test frameworks is the simplicity of the syntax for writing tests. 
 
@@ -26,8 +26,12 @@ An example of a test is as follows:
 11. CHECK "a#user-nav-link" EXISTS
 ```
 
-### User Interface
+## User Interface
 
 The user interface simplifies a lot of the workflows around creating and running various suites of tests.
 
 ![PARANOID](https://raw.githubusercontent.com/sdesalas/paranoid/master/design/screenshots/2016-02-22.History.png)
+
+## Download Releases
+
+#### [`v0.4.0`](https://github.com/sdesalas/paranoid/releases/tag/v0.4.0) aka 'TestDirector'
