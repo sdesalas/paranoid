@@ -6,7 +6,7 @@ _A simple GUI for testing websites and web applications._
 
 Anyone should be able to write tests easily.
 
-Test Director takes the complexity out of testing. You are given some tools to write simple scripts using SQL-like syntax. This test script is then compiled into other languages (such as JavaScript) and executed using different browser implementations (TestDirector Free comes bundled with a WebKit engine, Firefox and IE are available on the PRO version).
+Test Director takes the complexity out of testing. You are given some tools to write simple scripts using SQL-like syntax. This test script is then compiled into other languages (such as JavaScript) and executed using different browser implementations (Paranoid Free comes bundled with a WebKit engine, Firefox and IE are available on the PRO version).
 
 ### SAMPLE TEST
 

@@ -29,7 +29,7 @@
 			if (GLOBAL.process && process.env && path && fs) {
 				var homepath = process.env.HOME || process.env.USERPROFILE;
 				//prompt('process.env', JSON.stringify(process.env));
-				var tdHome = path.resolve(homepath, '.TestDirector');
+				var tdHome = path.resolve(homepath, '.Paranoid');
 				if (!fs.existsSync(tdHome)) { fs.mkdirSync(tdHome); }
 				var suites = path.resolve(tdHome, 'suites');
 				if (!fs.existsSync(suites)) { fs.mkdirSync(suites); }
