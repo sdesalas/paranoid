@@ -1,0 +1,453 @@
+<html>
+<head>
+<title>PARANOID (SOLO Edition)</title>
+<link href="lib/bootstrap/css/bootstrap.css" rel="stylesheet">
+<link href="lib/bootstrap-lightbox/bootstrap-lightbox.min.css" rel="stylesheet">
+<!--link href="lib/google-code-prettify/prettify.css" rel="stylesheet"-->
+<link href="style.css" rel="stylesheet">
+<script type="text/javascript" src="lib/jquery/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="lib/bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="lib/bootbox/bootbox-3.3.0.min.js"></script>
+<script type="text/javascript" src="lib/bootstrap-lightbox/bootstrap-lightbox.min.js"></script>
+<script type="text/javascript" src="lib/ace/ace.js" charset="utf-8"></script>
+<script type="text/javascript" src="lib/ace/ext-language_tools.js"></script>
+<script type="text/javascript" src="lib/mustache/mustache-0.8.1.min.js"></script>
+<!--script type="text/javascript" src="lib/google-code-prettify/prettify.js"></script-->
+<script type="text/javascript" src="src/Core.js"></script>
+<script type="text/javascript" src="src/App.js"></script>
+<script type="text/javascript" src="src/FileManager.js"></script>
+<script type="text/javascript" src="src/Editor.js"></script>
+<script type="text/javascript" src="src/History.js"></script>
+<style type="text/css" media="screen">
+    #browse #editor,
+    #browse #console { display: block; margin-top: 10px; border:1px solid #ccc; } 
+    #browse #console { overflow: scroll; line-height: 15px; }
+</style>
+</head>
+<body>
+
+<div id="top-nav" class="container-fluid" style="position: fixed; width:97%; padding-right:30px;">
+	<div class="row-fluid">
+		<ul class="thumbnails">
+		  {{#items}}
+		  <li class="span2">
+		    <div id="{{id}}" class="thumbnail {{cls}}" title="{{description}}">
+		      	<img src="{{thumb}}" alt="{{description}}"/>
+		    	<p>{{name}}</p>
+		  	</div>
+		  </li>
+		  {{/items}}
+		  {{^items}}
+		  No Files here
+		  {{/items}}
+		</ul>
+	</div>
+</div>
+
+<div id="splash">
+	<img src="img/logo.128x128.png"/>
+	<h1>PARANOID</h1>
+	<p>By Steven de Salas<span class="pull-right label label-inverse">v1.0.0</span></p>
+	<small class="text-center muted">Some Rights Reserved.</small>
+</div>
+
+<section id="browse" style="display:block;">
+	<nav class="fullheight">
+		<ul id="file-browser" class="nav nav-tabs nav-stacked">
+			<li class="nav-header"><ul class="crumb">{{#cwd}}<li><a href="#{{.}}">{{.}}</a></li> {{/cwd}}</ul></li>
+			{{#up}}
+			<li><a href="#.." class="up">..</a></li>
+			{{/up}}
+			{{#folders}}
+			<li><a href="#{{name}}" class="folder">{{name}}<span class="badge pull-right">{{tests}}</span></a></li>
+			{{/folders}}
+			<li><a href="#" class="newfolder">New Suite..</a></li>
+			{{#files}}
+			<li><a href="#{{name}}" class="file">{{name}}</a></li>
+			{{/files}}
+			<li><a href="#" class="newfile">New Test..</a></li>
+		</ul>
+	</nav>
+	<div class="main">
+		<div class="alert alert-success" role="alert">The text syntax seems ok.</div>
+			<div class="row-fluid" style="height: 31px;">
+				<div class="span11 input-prepend input-append">
+				  <div class="btn-group">
+				    <button class="btn dropdown-toggle" data-toggle="dropdown">
+				      Test
+				      <span class="caret"></span>
+				    </button>
+				    <ul class="dropdown-menu">
+				    	<li><a href="">Move</a></li>
+				    	<li><a href="">Delete</a></li>			    	
+				    </ul>
+				  </div>
+				  <input id="browse-filename" type="text" value="Untitled" class="span9">
+				  <button id="run-test" class="btn btn-primary">Run Test</button>
+				</div>
+			</div>
+			<div class="row-fluid">
+				<pre id="editor"> </pre>
+				<pre id="console" style="display:none; color: #ccc; background: #222;"> &gt; </pre>
+				<div>
+					<button id="mode-edit" class="btn btn-inverse btn-mini">Edit Mode</button>
+					<button id="mode-console" class="btn btn-mini">Console Output</button>
+					<small class="pull-right" style="padding: 5px 10px 0 10px;">Keyboard Shortcuts:&nbsp;
+						<span class="label tip" title="Comment Line">Ctrl+/</span>
+						<span class="label tip" title="Save File">Ctrl+S</span>
+						<span class="label tip" title="Autocomplete">Ctrl+M</span>
+						<span class="label tip" title="Run Tests">F5</span>
+					</small>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section id="history">
+
+	<nav class="fullheight fixed">
+		<ul id="results-browser" class="nav nav-tabs nav-stacked">
+			{{#runs}}
+			<li>
+				<a href="#{{folder}}" class="test">{{target}}
+				<div class="muted">
+					{{timeago}}
+					{{#failed}}<span class="badge badge-important pull-right" style="margin-left:5px;"><i class="icon-flag icon-white"></i></span>{{/failed}}
+				</div>
+				</a>
+			</li>
+			{{/runs}}
+		</ul>
+	</nav>
+
+	<div id="results-viewer" class="main content-fluid">
+		<script type="text/template">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="#results-main" data-toggle="tab">Results</a></li>
+			<li><a href="#results-original" data-toggle="tab">Original Steps</a></li>
+		</ul>
+		<div class="tab-content">
+			<div id="results-main" class="tab-pane active">
+			{{#testsuites}}
+				<div class="alert alert-info">
+					<a id="delete-result" href="#" class="btn btn-primary pull-right"><i class="icon-remove icon-white"></i> Delete Result</a>
+					<h4>{{name}}</h4>
+					<p>{{timeago}} <small class="muted">(Completed in: {{time}} seconds)</small></p>
+				</div>
+				<table class="table table-hover">
+				  <thead>
+				  	<tr>
+				  		<th style="text-align: right;padding-right: 14px;">#</th>
+				  		<th>Test</th>
+				  		<th>Result</th>
+				  	</tr>
+				  </thead>
+				  <tbody>
+					{{#testcases}}
+						<tr {{#success}}class="success"{{/success}}{{^success}}class="error"{{/success}}>
+							<td style="width:8%; text-align: right;">{{line}}</td>
+							<td style="width:75%;">{{info}}</td>
+							<td style="width:17%">
+							{{#success}}<span class="label label-success">Success</span>{{/success}}
+							{{^success}}<span class="label label-important">Fail</span>{{/success}}
+							</td>
+						</tr>
+						{{^success}}
+						<tr class="error">
+							<td>&nbsp;</td>
+							<td colspan="3"><span class="label label-important">{{failure.type}}</span> {{failure.message}}</td>
+						</tr>
+						{{/success}}
+				  	{{/testcases}}
+				  </tbody>
+				</table>
+			{{/testsuites}}
+			{{^testsuites}}
+				<div class="alert"><b>WARNING!</b> There are no test suites in this result set!</div>
+			{{/testsuites}}
+				<div class="row-fluid">
+					<ul class="thumbnails">
+					{{#images}}
+						<li class="span3">
+						<a href="#lightbox{{hash}}" data-toggle="lightbox" class="thumbnail">
+							<img src="{{src}}" data-src="holder.js/300x200" title="Line {{line}}">
+						</a>
+						<div id="lightbox{{hash}}" class="lightbox hide fade"  tabindex="-1" role="dialog" aria-hidden="true">
+							<div class='lightbox-content'>
+								<img src="{{src}}">
+								<div class="lightbox-caption"><p>{{filename}}</p></div>
+							</div>
+						</div>
+						</li>
+					{{/images}}
+					</ul>
+				</div>
+			</div>
+			<div id="results-original" class="tab-pane">
+				{{#tests}}
+				<div class="alert grey-box">
+					<h4>{{name}}</h4>
+					<p>{{timeago}}</p>
+				</div>
+				<pre class="prettyprint lang-sql linenums">
+					<ol>
+					{{#lines}}
+					<li>{{.}}</li>
+					{{/lines}}
+					</ol>
+				</pre>
+				{{/tests}}
+			</div>
+		</div>
+	</script>
+	</div>
+</section>
+
+<section id="schedule-tests">
+	
+		<div class="hero-unit go-pro" style="padding: 20px 30px; margin: 40px 180px;">
+			<h2>Go PRO!</h2>
+			<p>Runnning automated tests has never been easier.</p>
+			<p>Schedule your tests using Paranoid PRO Server.</p>
+			<p>Sign up for a PRO account and start testing with real browsers.</p>
+			<div class="browsers">
+				<img src="img/img-browsers.png" style=""/>
+			</div>
+			<br/>
+			<form class="form-horizontal">
+			  <div class="control-group">
+			    <label class="control-label" for="inputEmail">Email</label>
+			    <div class="controls">
+			      <input type="text" id="inputEmail" placeholder="Email">
+			    </div>
+			  </div>
+			  <div class="control-group">
+			    <div class="controls">
+			      <button type="submit" class="btn btn-primary">Start Now</button>
+			    </div>
+			  </div>
+			</form>
+		</div>
+
+</section>
+
+
+<section id="import-export">
+	<nav class="well">
+		<ul class="nav nav-list">
+			<li class="active"><a href="#">Home</a></li>
+			<li class="divider"></li>
+			<li class="nav-header">Build Server Instructions</li>
+			<li><a href="#">Jenkins</a></li>
+			<li><a href="#">Bamboo</a></li>
+			<li><a href="#">Team City</a></li>
+			<li class="divider"></li>
+			<li class="nav-header">Cloud Servers</li>
+			<li><a href="#">Paranoid PRO</a></li>
+		</ul>
+	</nav>
+	<div class="main content-fluid">
+		<div class="row-fluid">
+		<div class="hero-unit" style="padding-top: 20px; padding-bottom: 20px;margin-bottom: 20px;">
+			<h2>Continuous Testing</h2>
+			<p>Has never been easier</p>
+		</div>
+		<ul class="thumbnails">
+		  <li class="span4">
+		    <div class="thumbnail">
+		      <div class="background"><img src="img/icon-savetodisk.32x32.png" alt="" style="padding:30px"/></div>
+		      <div class="caption">
+		    	<h4>Package (ZIP) Tests</h4>
+		  		<p>Backup your test suites so you can take them with you wherever you go.</p>
+		  		<p><a href="#" class="btn btn-success">Backup ZIP</a></p>
+		  	  </div>
+		  </li>
+		  <li class="span4">
+		    <div class="thumbnail">
+		      <div class="background"><img src="img/icon-loadfromdisk.32x32.png" alt="" style="padding:30px"/></div>
+		      <div class="caption">
+		    	<h4>ZIP Restore</h4>
+		  		<p>Restore your tests from a previous backup. This will overwrite all your information.</p>
+		  		<p><a href="#" class="btn btn-danger">Restore ZIP</a></p>
+		  	  </div>
+		  </li>
+		  <li class="span4">
+		    <div class="thumbnail">
+		      <div class="background"><img src="img/icon-closedbox.32x32.png" alt="" style="padding:30px"/></div>
+		      <div class="caption">
+		    	<h4>Test Runner Pack</h4>
+		  		<p>Download your tests in an easily executable batch format (Windows and OSX).</p>
+		  		<p>
+					<a href="#" class="btn btn-primary">Windows</a>
+					<a href="#" class="btn btn-primary pull-right">Mac OSX</a>
+		  		</p>
+		  	  </div>
+		  </li>
+		</ul>
+		</div>
+	</div>
+</section>
+
+<section id="settings">
+	<nav class="well">
+		<ul class="nav nav-list">
+			<li class="active"><a href="#">Main</a></li>
+			<li class="divider"></li>
+			<li class="nav-header">Paranoid Pro</li>
+			<li><a href="#">API Key</a></li>
+			<li><a href="#">Paranoid Server</a></li>
+			<li><a href="#">Browser Bindings</a></li>
+			<li class="divider"></li>
+			<li class="nav-header">Paranoid Enterprise</li>
+			<li><a href="#">API Key</a></li>
+			<li><a href="#">Paranoid Server</a></li>
+			<li><a href="#">Browser Bindings</a></li>
+			<li><a href="#">Corporate Firewall Settings</a></li>
+		</ul>
+	</nav>
+	<div id="settings.home" class="main">
+		<h3>Settings &raquo; Main</h3>
+		<form class="form-horizontal">
+		  <div class="control-group">
+		    <label class="control-label" for="inputEmail">Working Directory</label>
+		    <div class="controls">
+		      <input type="text" id="settings.main.cwd" disabled="disabled" value="{{cwd}}" style="width:100%">
+		    </div>
+		  </div>
+		  <div class="control-group">
+		    <div class="controls">
+		      <button type="submit" class="btn btn-primary">Save Settings</button>
+		    </div>
+		  </div>
+		</form>
+	</div>
+</section>
+
+<section id="wiki">
+	<nav class="well" style="position:fixed;">
+		<ul class="nav nav-list">
+			<li class="active"><a href="#" data-src="wiki/Home.md">Home</a></li>
+			<li class="divider"></li>
+			{{#pages}}
+			<li><a href="#" data-src="wiki/{{.}}.md">{{.}}</a></li>
+			{{/pages}}
+		</ul>
+	</nav>
+	<div class="main">
+		{{{content}}}
+	</div>
+</section>
+
+<div id="toolbox">
+
+</div>
+<script id="load-editor">
+(function() {
+	ace.require('ace/ext/language_tools');
+    var editor = App.editor.ace = ace.edit("editor");
+    editor.setTheme("ace/theme/eclipse");
+    editor.getSession().setMode("ace/mode/joyful");
+})();
+$(document).ready(function() {/*prettyPrint()*/})
+</script>
+<script id="init-js">
+(function() {
+
+	// ADD TOP NAV
+	App.navigation.renderTo('#top-nav');
+
+	$(window).resize(function() {
+		var height = $(window).height() - 255;
+		$('#editor').height(height);
+		$('#console').height(height);
+		$('section nav.fullheight').height(height + 142);
+	});
+
+	$(window).resize();
+
+	$('.tip').each(function(i, e) {
+		var tooltip = $(e).attr('title');
+		if (tooltip) {
+			$(e).tooltip({gravity: 's'});
+		}
+	})
+
+
+	// ADD WIKI (Requires NODE)
+	//try {
+		App.wiki.renderTo('#wiki');
+	//} catch (e) {}
+
+	// SETTINGS
+	$('#settings\\.home').render({
+		cwd: App.userhome
+	});
+
+
+	// ADD CONTEXT MENU BUTTONS (Requires NODE-WEBKIT)
+	try {
+		App.gui.init();
+	} catch (e) {}
+
+
+	// LOAD FILES
+	//try {
+		App.filebrowser.init('#file-browser', '#editor');
+	//} catch (e) {}
+
+
+	// INIT EDITOR
+	App.editor.init('#editor', '#console');
+
+
+	$("#mode-console").click(function(e) {
+		App.editor.mode('console');
+	});
+
+	$("#mode-edit").click(function(e) {
+		App.editor.mode('edit');
+	});
+
+
+	// HISTORY
+	App.history.init('#results-browser', '#results-viewer');
+
+
+	$(window).bind('keydown', function(e) {
+		// Check if any modal windows are active
+		var modal = $('.bootbox.modal');
+		if (modal.length) {
+			// Handle Enter (Ok) 
+			if (e.keyCode == 13) { $('a.btn-primary', modal).click(); return false;}     // enter
+		}
+		// F5
+		 if(e.which === 116) {
+	       console.log('F5 keydown', e);
+	       App.editor.execute();
+	       return false;
+	    }
+	    // Ctrl+S
+	    if(e.ctrlKey && e.which === 83) { 
+	        console.log('Ctrl+S');
+	        App.editor.save();
+	        return false;
+	    }
+	    // Ctrl+M
+	    if(e.ctrlKey && e.which === 77) { 
+	        console.log('Ctrl+M');
+	        App.editor.toggle('autocompletion');
+	        return false;
+	    }
+	});
+
+	$('#run-test').click(function() {App.editor.execute();});
+
+	$('#splash').delay(2000).fadeOut();
+
+
+})();
+
+</script>
+</body>
+</html>

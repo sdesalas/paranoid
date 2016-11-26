@@ -1,0 +1,30 @@
+{
+  "name": "paranoid",
+  "version": "0.5.0",
+  "description": "Insane Test Automation",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "builder": "node build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sdesalas/paranoid.git"
+  },
+  "keywords": [
+    "test",
+    "automation",
+    "phantomjs"
+  ],
+  "author": "Steven de Salas",
+  "license": "GPLv3",
+  "bugs": {
+    "url": "https://github.com/sdesalas/paranoid/issues"
+  },
+  "homepage": "https://github.com/sdesalas/paranoid#readme",
+  "devDependencies": {
+    "archiver": "^1.2.0",
+    "fs-extra": "^1.0.0",
+    "nw-builder": "^3.1.2"
+  }
+}
